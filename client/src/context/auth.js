@@ -17,8 +17,9 @@ const AuthProvider = ({children}) =>{
                 token: parseDate.token,
             })
         }
-    },[auth]);
-    
+        // eslint-disable-next-line
+    },[]);
+
     return (
         <AuthContext.Provider value={[auth,setAuth]}>
             {children}
