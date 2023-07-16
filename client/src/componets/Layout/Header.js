@@ -11,7 +11,7 @@ const Header = () => {
         })
         localStorage.removeItem("auth");
         toast.success("Logout Successfully");
-        
+
     }
     return (
         <div>
@@ -28,7 +28,7 @@ const Header = () => {
                                     <NavLink to="/" className="nav-link " >Home</NavLink>
                                 </li>
                                 <li className="nav-item">
-                                    <NavLink to="/" className="nav-link " >Category</NavLink>
+                                    <NavLink to="/category" className="nav-link " >Category</NavLink>
                                 </li>
                                 {!auth.user ? (
                                     <>
