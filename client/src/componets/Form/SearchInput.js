@@ -18,7 +18,7 @@ const SearchInput = () => {
     return (
         <div>
             <form className="d-flex" role="search" onSubmit={hangleSubmit}>
-                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value={values.keyword} onChange={(e) => setValues({ ...values, keyword: e.target.value })} />
+                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value={values.keyword} onChange={(e) => setValues({ ...values, keyword: e.target.value })} style={{    width: "46vw",textalign: "center",fontsize: "21px",fontfamily: "system-ui"}}/>
                 <button className="btn btn-outline-success" type="submit">Search</button>
             </form>
 

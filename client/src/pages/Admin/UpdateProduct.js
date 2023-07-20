@@ -5,6 +5,8 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { Select } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
+import PageLoad from '../../componets/PageLoad';
+
 const { Option } = Select;
 
 const UpdateProduct = () => {
@@ -19,6 +21,7 @@ const UpdateProduct = () => {
   const [shipping, setShipping] = useState("");
   const [photo, setPhoto] = useState("");
   const [id, setId] = useState("");
+  const [pageload, setPageload] = useState(false);
 
   //get single product
   const getSingleProduct = async () => {
@@ -48,6 +51,7 @@ const UpdateProduct = () => {
       const { data } = await axios.get("http://localhost:8080/api/v1/category/get-category");
       if (data?.success) {
         setCategories(data?.category);
+        setPageload(true);
       }
     } catch (error) {
       console.log(error);
@@ -103,13 +107,17 @@ const UpdateProduct = () => {
   };
   return (
     <Layout title={"Dashboard - Create Product"}>
-      <div className="container-fluid m-3 p-3">
+        <br /><br /><br /><br /><br />
+
+      <div className="container m-3 p-3" style={{height:"70vh"}}>
         <div className="row">
           <div className="col-md-3">
             <AdminMenu />
           </div>
           <div className="col-md-9">
-            <h1>Update Product</h1>
+            {pageload ? (
+              <>
+              <h1>Update Product</h1>
             <div className="m-1 w-75">
               <Select
                 bordered={false}
@@ -225,9 +233,13 @@ const UpdateProduct = () => {
                 </button>
               </div>
             </div>
+              </>
+            ): (<PageLoad/>)}
           </div>
         </div>
       </div>
+      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
     </Layout>
   );
 };

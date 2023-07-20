@@ -5,6 +5,7 @@ import { Select } from "antd";
 import { useNavigate } from "react-router-dom";
 import Layout from "../../componets/Layout/Layout";
 import AdminMenu from "../../componets/Layout/AdminMenu";
+import PageLoad from "../../componets/PageLoad";
 const { Option } = Select;
 
 const CreateProduct = () => {
@@ -17,6 +18,7 @@ const CreateProduct = () => {
   const [quantity, setQuantity] = useState("");
   const [shipping, setShipping] = useState("");
   const [photo, setPhoto] = useState("");
+  const [pageload, setPageload] = useState(false);
 
   //get all category
   const getAllCategory = async () => {
@@ -24,6 +26,7 @@ const CreateProduct = () => {
       const { data } = await axios.get("http://localhost:8080/api/v1/category/get-category");
       if (data?.success) {
         setCategories(data?.category);
+        setPageload(true);
       }
     } catch (error) {
       console.log(error);
@@ -46,6 +49,7 @@ const CreateProduct = () => {
       productData.append("quantity", quantity);
       productData.append("photo", photo);
       productData.append("category", category);
+
       const { data } = axios.post(
         "http://localhost:8080/api/v1/product/create-product",
         productData
@@ -64,14 +68,18 @@ const CreateProduct = () => {
 
   return (
     <Layout title={"Dashboard - Create Product"}>
-      <div className="container-fluid m-3 p-3 dashboard">
+        <br /><br /><br /><br /><br />
+
+      <div className="container m-3 p-3" style={{height:"70vh"}}>
         <div className="row">
           <div className="col-md-3">
             <AdminMenu />
           </div>
           <div className="col-md-9">
-            <h1>Create Product</h1>
-            <div className="m-1 w-75">
+            {pageload ? (
+              <>
+              <h1 className="text-center">Create Product</h1>
+            <div className="m-1 w-100">
               <Select
                 bordered={false}
                 placeholder="Select a category"
@@ -170,9 +178,13 @@ const CreateProduct = () => {
                 </button>
               </div>
             </div>
+              </>
+            ): (<><PageLoad/></>)}
           </div>
         </div>
       </div>
+      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
     </Layout>
   );
 };

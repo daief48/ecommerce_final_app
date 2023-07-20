@@ -4,15 +4,20 @@ import AdminMenu from '../../componets/Layout/AdminMenu';
 import toast from "react-hot-toast";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import PageLoad from '../../componets/PageLoad';
 
 const Products = () => {
     const [products, setProducts] = useState([]);
+    const [pageload, setPageload] = useState(false);
 
     //get All Products
     const getAllProducts = async () => {
         try {
             const { data } = await axios.get("http://localhost:8080/api/v1/product/get-product");
-            setProducts(data.products);
+            if(data){
+              setProducts(data.products);
+              setPageload(true);
+            }
 
         } catch (error) {
             console.log(error);
@@ -21,15 +26,19 @@ const Products = () => {
     }
     useEffect(() => {
         getAllProducts();
-    }, [])
+    }, []);
     return (
         <Layout>
-        <div className="row container dashboard">
+            <br /><br /><br /><br /><br />
+
+        <div className="row container m-3 p-3" style={{height:"70vh"}}>
           <div className="col-md-3">
             <AdminMenu />
           </div>
           <div className="col-md-9 ">
-            <h1 className="text-center">All Products List</h1>
+            {pageload ? (
+              <>
+              <h1 className="text-center">All Products List</h1>
             <div className="d-flex flex-wrap">
               {products?.map((p) => (
                 <Link
@@ -51,8 +60,12 @@ const Products = () => {
                 </Link>
               ))}
             </div>
+              </>
+            ):(<><PageLoad/></>)}
           </div>
         </div>
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
       </Layout>
     )
 }

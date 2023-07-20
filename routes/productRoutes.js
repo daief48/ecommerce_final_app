@@ -1,7 +1,7 @@
 import express from "express";
 import { isAdmin, requireSignIn } from "../middlewares/authMiddleware.js";
 import formidable from "express-formidable";
-import { createProductController, getProductController,getSingleProductController,productPhotoController,deleteProductController,updateProductController, productFiltersController, productCountController, productListController, searchProductController, realtedProductController, productCategoryController } from "../controller/productController.js";
+import { createProductController, getProductController,getSingleProductController,productPhotoController,deleteProductController,updateProductController, productFiltersController, productCountController, productListController, searchProductController, realtedProductController, productCategoryController, braintreeTokenController, brainTreePaymentController, baskPayment } from "../controller/productController.js";
 
 const router = express.Router();
 
@@ -50,4 +50,63 @@ router.get('/search/:keyword',searchProductController);
 router.get('/related-product/:pid/:cid',realtedProductController);
 
 router.get("/product-category/:slug",productCategoryController);
+router.post("/braintree/payment",requireSignIn, brainTreePaymentController);
+//payments routes
+//token
+router.get("/braintree/token", braintreeTokenController);
+// bkash payment
+router.post('/ssl-request',baskPayment);
+
+router.post("/ssl-payment-notification", async (req, res) => {
+
+  /** 
+  * If payment notification
+  */
+
+  return res.status(200).json(
+    {
+      data: req.body,
+      message: 'Payment notification'
+    }
+  );
+})
+
+router.post("/ssl-payment-success", async (req, res) => {
+
+  /** 
+  * If payment successful 
+  */
+
+  return res.redirect('http://localhost:3000/')
+})
+
+router.post("/ssl-payment-fail", async (req, res) => {
+
+  /** 
+  * If payment failed 
+  */
+
+  return res.status(200).json(
+    {
+      data: req.body,
+      message: 'Payment failed'
+    }
+  );
+})
+
+router.post("/ssl-payment-cancel", async (req, res) => {
+
+  /** 
+  * If payment cancelled 
+  */
+
+  return res.status(200).json(
+    {
+      data: req.body,
+      message: 'Payment cancelled'
+    }
+  );
+})
+
+
 export default router;

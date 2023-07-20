@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Layout from '../../componets/Layout/Layout';
 import AdminMenu from '../../componets/Layout/AdminMenu';
 import { useAuth } from '../../context/auth';
 const AdminDashboard = () => {
     const [auth] = useAuth();
-
+    const [pageload, setPageload] = useState(false);
   return (
     <Layout title={"Dashbord"}>
-      <div className="container-fluid m-3 p-3">
+    <br /><br /><br /><br /><br />
+      <div className="container m-3 p-3" style={{marginBottom:"40px"}}>
         <div className="row">
             <div className="col-md-3">
                 <AdminMenu/>
@@ -21,6 +22,8 @@ const AdminDashboard = () => {
             </div>
         </div>
       </div>
+      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
     </Layout>
   )
 }

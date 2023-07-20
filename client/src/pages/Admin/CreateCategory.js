@@ -6,12 +6,15 @@ import toast from "react-hot-toast";
 import axios from 'axios';
 import { Modal } from "antd";
 import CategoryForm from '../../componets/Form/CategoryForm';
+import PageLoad from '../../componets/PageLoad';
 const CreateCategory = () => {
     const [categories, setCategories] = useState([]);
     const [name, setName] = useState("");
     const [visible, setVisible] = useState(false);
     const [selected, setSelected] = useState(null);
     const [updatedName, setUpdatedName] = useState("");
+    const [pageload, setPageload] = useState(false);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -24,11 +27,11 @@ const CreateCategory = () => {
             if (data?.success) {
                 toast.success(`${name} is created`);
             } else {
-                toast.error(data.message);
+                // toast.error(data.message);
             }
         } catch (error) {
             console.log(error);
-            toast.error("Something went wrong in input form");
+            // toast.error("Something went wrong in input form");
         }
     }
     // get all category
@@ -38,10 +41,11 @@ const CreateCategory = () => {
             if (data?.success) {
                 setCategories(data?.category);
                 getAllCategory();
+                setPageload(true);
             }
         } catch (error) {
             console.log(error);
-            toast.error("Something went wrong in getting category");
+            // toast.error("Something went wrong in getting category");
         }
     }
     useEffect(() => {
@@ -63,7 +67,7 @@ const CreateCategory = () => {
         setVisible(false);
         getAllCategory();
       } else {
-        toast.error(data.message);
+        // toast.error(data.message);
       }
     } catch (error) {
       console.log(error);
@@ -81,29 +85,33 @@ const CreateCategory = () => {
 
         getAllCategory();
       } else {
-        toast.error(data.message);
+        // toast.error(data.message);
       }
     } catch (error) {
-      toast.error("Somtihing went wrong");
+    //   toast.error("Somtihing went wrong");
     }
   };
     return (
         <Layout title={"Dashboard - Create Category"}>
-            <div className="container m-3 p-3">
+            <br /><br /><br /><br /><br />
+
+            <div className="container m-3 p-3" style={{height:"70vh"}}>
                 <div className="row">
                     <div className="col-md-3">
                         <AdminMenu />
                     </div>
                     <div className="col-md-9">
-                        <h1>Manage Category</h1>
-                        <div className="p-3 w-50">
+                        {pageload ? (
+                            <>
+                            <h1>Manage Category</h1>
+                        <div className="p-3 w-100">
                             <CategoryForm
                                 handleSubmit={handleSubmit}
                                 value={name}
                                 setValue={setName}
                             />
                         </div>
-                        <div className='w-75'>
+                        <div className='w-100'>
                             <table className="table">
                                 <thead>
                                     <tr>
@@ -132,9 +140,13 @@ const CreateCategory = () => {
                                 setValue={setUpdatedName}
                                 handleSubmit={handleUpdate} />
                         </Modal>
+                            </>
+                        ): (<><PageLoad/></>)}
                     </div>
                 </div>
             </div>
+            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
         </Layout>
     )
 }

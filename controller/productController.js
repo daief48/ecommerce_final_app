@@ -2,6 +2,19 @@ import slugify from "slugify";
 import productModel from "../models/productModel.js";
 import fs from "fs";
 import categoryModel from "../models/categoryModel.js";
+import braintree from "braintree";
+import orderModel from "../models/orderModel.js";
+import dotenv from "dotenv";
+import SSLCommerzPayment from "sslcommerz-lts";
+dotenv.config();
+
+// payment gateway
+var gateway = new braintree.BraintreeGateway({
+  environment: braintree.Environment.Sandbox,
+  merchantId: process.env.BRAINTREE_MERCHANR_ID,
+  publicKey: process.env.BRAINTREE_PUBLIC_KEY,
+  privateKey: process.env.BRAINTREE_PRIVATE_KEY,
+});
 
 export const createProductController = async (req, res) => {
     try {
@@ -222,7 +235,7 @@ export const productCountController = async (req, res) => {
 // product list base on page
 export const productListController = async (req,res) =>{
   try {
-    const perPage = 1;
+    const perPage = 8;
     const page = req.params.page ? req.params.page : 1;
     const products = await productModel.find({}).select("-photo").skip((page-1) * perPage).limit(perPage).sort({createdAt: -1});
 
@@ -309,3 +322,115 @@ export const productCategoryController = async (req, res) =>{
     });
   }
 }
+//payment gateway api
+//token
+export const braintreeTokenController = async (req, res) => {
+  try {
+    gateway.clientToken.generate({}, function (err, response) {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.send(response);
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+//payment
+export const brainTreePaymentController = async (req, res) => {
+  try {
+    const { nonce, cart } = req.body;
+    let total = 0;
+    cart.map((i) => {
+      total += i.price;
+    });
+    let newTransaction = gateway.transaction.sale(
+      {
+        amount: total,
+        paymentMethodNonce: nonce,
+        options: {
+          submitForSettlement: true,
+        },
+      },
+      function (error, result) {
+        if (result) {
+          const order = new orderModel({
+            products: cart,
+            payment: result,
+            buyer: req.user._id,
+          }).save();
+          res.json({ ok: true });
+        } else {
+          res.status(500).send(error);
+        }
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// baksh
+export const baskPayment = async (req, res) =>{
+  /** 
+    * Create ssl session request 
+    */
+  const { cart, auth } = req.body;
+  let total = 0;
+  cart.map((i) => {
+    total += i.price;
+  });
+  
+  const order = new orderModel({
+    products: cart,
+    buyer: auth?.user,
+  }).save();
+
+  const data = {
+    total_amount: total,
+    currency: 'BDT',
+    tran_id: 'REF123',
+    success_url: `${process.env.ROOT}/ssl-payment-success`,
+    fail_url: `${process.env.ROOT}/ssl-payment-fail`,
+    cancel_url: `${process.env.ROOT}/ssl-payment-cancel`,
+    shipping_method: 'No',
+    product_name: 'Computer.',
+    product_category: 'Electronic',
+    product_profile: 'general',
+    cus_name: 'Daief',
+    cus_email: 'daiefsikder4500@gmail.com',
+    cus_add1: 'Dhaka',
+    cus_add2: 'Dhaka',
+    cus_city: 'Dhaka',
+    cus_state: 'Dhaka',
+    cus_postcode: '1000',
+    cus_country: 'Bangladesh',
+    cus_phone: '01924529986',
+    cus_fax: '01711111111',
+    multi_card_name: 'mastercard',
+    value_a: 'ref001_A',
+    value_b: 'ref002_B',
+    value_c: 'ref003_C',
+    value_d: 'ref004_D',
+    ipn_url: `${process.env.ROOT}/ssl-payment-notification`,
+  };
+
+  const sslcommerz = new SSLCommerzPayment(process.env.STORE_ID, process.env.STORE_PASSWORD, false) //true for live default false for sandbox
+  sslcommerz.init(data).then(data => {
+
+    //process the response that got from sslcommerz 
+    //https://developer.sslcommerz.com/doc/v4/#returned-parameters
+
+    if (data?.GatewayPageURL) {
+      return res.status(200).json({url: data?.GatewayPageURL});
+    }
+    else {
+      return res.status(400).json({
+        message: "Session was not successful"
+      });
+    }
+  });
+
+
+} 
