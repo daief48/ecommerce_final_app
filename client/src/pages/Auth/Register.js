@@ -39,6 +39,7 @@ const Register = () => {
 
   return (
     <Layout title="Register - Ecommer App">
+    <br /><br /><br /><br />
       <div className="form-container" style={{ minHeight: "90vh" }}>
         <form onSubmit={handleSubmit}>
           <h4 className="title">REGISTER FORM</h4>
