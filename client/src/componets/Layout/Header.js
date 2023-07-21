@@ -39,7 +39,7 @@ const Header = () => {
                         </button>
 
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                            <div className="m-auto">
+                            <div className="m-auto" style={{width:"44vw"}}>
                                 <SearchInput />
                             </div>
 
