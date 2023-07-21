@@ -15,7 +15,7 @@ const ProductDetalis = () => {
   const getProduct = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:8080/api/v1/product/get-product/${params.slug}`
+        `https://ecommerce-final-app-backend.onrender.com/api/v1/product/get-product/${params.slug}`
       );
       setProduct(data?.product);
       getSimilarProduct(data?.product._id, data?.product.category._id);
@@ -28,7 +28,7 @@ const ProductDetalis = () => {
 const getSimilarProduct = async (pid, cid) => {
     try {
       const { data } = await axios.get(
-        `http://localhost:8080/api/v1/product/related-product/${pid}/${cid}`
+        `https://ecommerce-final-app-backend.onrender.com/api/v1/product/related-product/${pid}/${cid}`
       );
       setRelatedProducts(data?.products);
     } catch (error) {
@@ -39,7 +39,7 @@ const getSimilarProduct = async (pid, cid) => {
     <Layout>
       <div className="row container mt-2">
         <div className="col-md-6">
-            <img src={`http://localhost:8080/api/v1/product/product-photo/${product._id}`} alt={product.name} height="300" width={"350px"}/>
+            <img src={`https://ecommerce-final-app-backend.onrender.com/api/v1/product/product-photo/${product._id}`} alt={product.name} height="300" width={"350px"}/>
         </div>
         <div className="col-md-6">
             <h1 className="text-center">Product Details</h1>
@@ -60,7 +60,7 @@ const getSimilarProduct = async (pid, cid) => {
           {relatedProducts?.map((p) => (
             <div className="card m-2" key={p._id}>
               <img
-                src={`http://localhost:8080/api/v1/product/product-photo/${p._id}`}
+                src={`https://ecommerce-final-app-backend.onrender.com/api/v1/product/product-photo/${p._id}`}
                 className="card-img-top"
                 alt={p.name} style={{"height":"200px"}}
               />

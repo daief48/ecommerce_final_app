@@ -30,7 +30,7 @@ const Profile = () => {
     const yes = prompt("Are you sure to update your Profile?")
     if(yes){
       try {
-        const { data } = await axios.put("http://localhost:8080/api/v1/auth/profile", {
+        const { data } = await axios.put("https://ecommerce-final-app-backend.onrender.com/api/v1/auth/profile", {
           name,
           email,
           password,

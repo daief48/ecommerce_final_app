@@ -48,7 +48,7 @@ const CartPage = () => {
   //get payment gateway token
   const getToken = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8080/api/v1/product/braintree/token");
+      const { data } = await axios.get("https://ecommerce-final-app-backend.onrender.com/api/v1/product/braintree/token");
       setClientToken(data?.clientToken);
     } catch (error) {
       console.log(error);
@@ -62,7 +62,7 @@ const CartPage = () => {
   const handlePayment = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.post("http://localhost:8080/api/v1/product/ssl-request", {
+      const { data } = await axios.post("https://ecommerce-final-app-backend.onrender.com/api/v1/product/ssl-request", {
         cart,
         auth
       });
@@ -106,7 +106,7 @@ const CartPage = () => {
                 <div className="row card flex-row" key={p._id}>
                   <div className="col-md-4">
                     <img
-                      src={`http://localhost:8080/api/v1/product/product-photo/${p._id}`}
+                      src={`https://ecommerce-final-app-backend.onrender.com/api/v1/product/product-photo/${p._id}`}
                       className="card-img-top"
                       alt={p.name}
                       width="100%"

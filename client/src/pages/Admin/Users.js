@@ -15,7 +15,7 @@ const Users = () => {
 
   const getOrders = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8080/api/v1/auth/getalluser");
+      const { data } = await axios.get("https://ecommerce-final-app-backend.onrender.com/api/v1/auth/getalluser");
       setOrders(data);
       setPageload(true);
     } catch (error) {
