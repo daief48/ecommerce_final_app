@@ -81,6 +81,7 @@ const CartPage = () => {
   };
   return (
     <Layout>
+    <br /><br /><br /><br />
       <div className=" cart-page container">
         <div className="row">
           <div className="col-md-12">
@@ -182,6 +183,7 @@ const CartPage = () => {
           </div>
         </div>
       </div>
+      <br /><br /><br /><br />
     </Layout>
   );
 };

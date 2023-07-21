@@ -31,7 +31,7 @@ const Products = () => {
         <Layout>
             <br /><br /><br /><br /><br />
 
-        <div className="row container m-3 p-3" style={{height:"70vh"}}>
+        <div className="row w-100 m-3 p-3 " style={{height:"70vh"}}>
           <div className="col-md-3">
             <AdminMenu />
           </div>
@@ -53,8 +53,8 @@ const Products = () => {
                       alt={p.name} style={{height:"300px"}}
                     />
                     <div className="card-body">
-                      <h5 className="card-title">{p.name}</h5>
-                      <p className="card-text">{p.description}</p>
+                      <h5 className="card-title">{p.name.substring(0, 13)}</h5>
+                      <p className="card-text">{p.description.substring(0, 60)}</p>
                     </div>
                   </div>
                 </Link>
@@ -65,6 +65,7 @@ const Products = () => {
           </div>
         </div>
         <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
         <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
       </Layout>
     )

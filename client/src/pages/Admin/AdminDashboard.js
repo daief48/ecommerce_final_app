@@ -8,7 +8,7 @@ const AdminDashboard = () => {
   return (
     <Layout title={"Dashbord"}>
     <br /><br /><br /><br /><br />
-      <div className="container m-3 p-3" style={{marginBottom:"40px"}}>
+      <div className="row w-100 m-3 p-3 container" style={{marginBottom:"40px"}}>
         <div className="row">
             <div className="col-md-3">
                 <AdminMenu/>

@@ -51,7 +51,7 @@ const AdminOrders = () => {
     <Layout title={"All Orders Data"}>
         <br /><br /><br /><br /><br />
 
-      <div className="row container m-3 p-3" >
+      <div className="row w-100 m-3 p-3 container" >
         <div className="col-md-3">
           <AdminMenu />
         </div>

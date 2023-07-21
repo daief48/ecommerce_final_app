@@ -22,6 +22,7 @@ const Header = () => {
     return (
         <div>
             <>
+            
                 <nav className="navbar navbar-expand-lg container-fluid" style={{ background: "rgb(232 225 137)", padding: "4px", position: "fixed", top: "0", zIndex: "1" }}>
                     <div className="container-fluid">
                         <Link to="/" className="navbar-brand" href="#">

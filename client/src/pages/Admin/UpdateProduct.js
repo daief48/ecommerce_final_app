@@ -109,7 +109,7 @@ const UpdateProduct = () => {
     <Layout title={"Dashboard - Create Product"}>
         <br /><br /><br /><br /><br />
 
-      <div className="container m-3 p-3" style={{height:"70vh"}}>
+      <div className="row w-100 m-3 p-3 container" style={{height:"70vh"}}>
         <div className="row">
           <div className="col-md-3">
             <AdminMenu />

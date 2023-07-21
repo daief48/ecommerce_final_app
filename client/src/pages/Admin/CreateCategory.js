@@ -95,12 +95,11 @@ const CreateCategory = () => {
         <Layout title={"Dashboard - Create Category"}>
             <br /><br /><br /><br /><br />
 
-            <div className="container m-3 p-3" style={{height:"70vh"}}>
-                <div className="row">
+            <div className="row w-100 m-3 p-3 container" style={{height:"70vh"}}>
                     <div className="col-md-3">
                         <AdminMenu />
                     </div>
-                    <div className="col-md-9">
+                    <div className="col-md-9 w-100">
                         {pageload ? (
                             <>
                             <h1>Manage Category</h1>
@@ -124,7 +123,7 @@ const CreateCategory = () => {
                                         <>
                                             <tr>
                                                 <td key={c._id}>{c.name}</td>
-                                                <td>
+                                                <td className='d-flex'>
                                                     <button className='btn btn-primary ms-2' onClick={() => { setVisible(true); setUpdatedName(c.name) ;setSelected(c)}} >Edit</button>
                                                     <button className='btn btn-danger ms-2' onClick={()=>handleDelete(c._id)}>Delete</button>
                                                 </td>
@@ -142,7 +141,6 @@ const CreateCategory = () => {
                         </Modal>
                             </>
                         ): (<><PageLoad/></>)}
-                    </div>
                 </div>
             </div>
             <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />

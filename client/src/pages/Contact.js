@@ -4,6 +4,7 @@ import Layout from "../componets/Layout/Layout";
 const Contact = () => {
   return (
     <Layout title={"Contact us"}>
+    <br /><br /><br /><br />
       <div className="row contactus ">
         <div className="col-md-6 ">
           <img
@@ -29,6 +30,8 @@ const Contact = () => {
           </p>
         </div>
       </div>
+      <br /><br /><br /><br />
+
     </Layout>
   );
 };

@@ -4,6 +4,8 @@ import Layout from "../componets/Layout/Layout";
 const About = () => {
   return (
     <Layout title={"About us - Ecommerce App"}>
+        <br /><br /><br /><br />
+
       <div className="row contactus ">
         <div className="col-md-6 ">
           <img
@@ -23,6 +25,8 @@ const About = () => {
           </p>
         </div>
       </div>
+      <br /><br /><br /><br />
+
     </Layout>
   );
 };

@@ -3,9 +3,9 @@ import "./cafe.css";
 const Carsour = () => {
     return (
         <div>
-            <div className="w-100">
+            <div className="">
                 <div className="banner-ani">
-                    <div className="row">
+                    <div className="row w-100">
                         <div className="col-lg-2 col-sm-2 col-2">
                             <div className="engin-ani">
                                 <div className="picton_footer">

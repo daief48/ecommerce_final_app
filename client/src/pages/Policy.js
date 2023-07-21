@@ -4,6 +4,7 @@ import Layout from "../componets/Layout/Layout";
 const Policy = () => {
   return (
     <Layout title={"Privacy Policy"}>
+        <br /><br /><br /><br />
       <div className="row contactus ">
         <div className="col-md-6 ">
           <img
@@ -22,6 +23,8 @@ const Policy = () => {
           <p>add privacy policy</p>
         </div>
       </div>
+      <br /><br /><br /><br />
+
     </Layout>
   );
 };
