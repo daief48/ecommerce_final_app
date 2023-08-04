@@ -11,7 +11,7 @@ import Layout from "../componets/Layout/Layout";
 
 const CartPage = () => {
   const [auth, setAuth] = useAuth();
-  const [cart, setCart] = useCart();
+  const [cart, setCart] = useCart(); // get data of cart
   const [clientToken, setClientToken] = useState("");
   const [instance, setInstance] = useState("");
   const [loading, setLoading] = useState(false);
@@ -79,6 +79,10 @@ const CartPage = () => {
       setLoading(false);
     }
   };
+
+
+
+  /////////////////////////////////////////////////////////////////////////
   return (
     <Layout>
     <br /><br /><br /><br />

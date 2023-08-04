@@ -34,7 +34,7 @@ export const registerController = async (req, res) => {
         message: "Already Register please login",
       });
     }
-    //register user
+    //register user hashed password
     const hashedPassword = await hashPassword(password);
     //save
     const user = await new userModel({
@@ -80,6 +80,7 @@ export const loginController = async (req, res) => {
         message: "Email is not registerd",
       });
     }
+    // Decript hashed password...
     const match = await comparePassword(password, user.password);
     if (!match) {
       return res.status(200).send({

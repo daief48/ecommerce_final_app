@@ -11,11 +11,12 @@ const CategoryProduct = () => {
 
   useEffect(() => {
     if (params?.slug) getPrductsByCat();
+    // eslint-disable-next-line
   }, [params?.slug]);
   const getPrductsByCat = async () => {
     try {
       const { data } = await axios.get(
-        `https://ecommerce-final-app-backend.onrender.com/product/product-category/${params.slug}`
+        `https://ecommerce-final-app-backend.onrender.com/api/v1/product/product-category/${params.slug}`
       );
       setProducts(data?.products);
       setCategory(data?.category);
@@ -26,6 +27,7 @@ const CategoryProduct = () => {
 
   return (
     <Layout>
+    <br /><br /><br /><br />
       <div className="container mt-3 category">
         <h4 className="text-center">Category - {category?.name}</h4>
         <h6 className="text-center">{products?.length} result found </h6>
