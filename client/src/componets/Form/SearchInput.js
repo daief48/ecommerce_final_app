@@ -8,7 +8,7 @@ const SearchInput = () => {
     const hangleSubmit = async (e) =>{
         e.preventDefault();
         try{
-            const {data} = await axios.get(`https://ecommerce-final-app-forntend.onrender.com/api/v1/product/search/${values.keyword}`);
+            const {data} = await axios.get(`https://ecommerce-final-app-backend.onrender.com/api/v1/product/search/${values.keyword}`);
             setValues({...values, results: data});
             navigate('/search');
         }catch(error){
