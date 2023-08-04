@@ -2,11 +2,15 @@ import React, { useEffect, useState } from 'react'
 import Layout from '../componets/Layout/Layout'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios';
+import { useCart } from "../context/cart";
+import toast from "react-hot-toast";
 const ProductDetalis = () => {
     const params = useParams();
     const [product, setProduct] = useState([]);
     const [relatedProducts, setRelatedProducts] = useState([]);
     const navigate = useNavigate();
+    const [cart, setCart] = useCart();
+
  //initalp details
  useEffect(() => {
     if (params?.slug) getProduct();
@@ -37,7 +41,7 @@ const getSimilarProduct = async (pid, cid) => {
   };
   return (
     <Layout>
-    <br /><br /><br /><br />
+    <br /><br /><br /><br /> <br />
       <div className="row container mt-2">
         <div className="col-md-6">
             <img src={`https://ecommerce-final-app-backend.onrender.com/api/v1/product/product-photo/${product._id}`} alt={product.name} height="300" width={"350px"}/>
@@ -48,7 +52,7 @@ const getSimilarProduct = async (pid, cid) => {
             <h6>Description : {product.description}</h6>
             <h6>Price : ${product.price}</h6>
             <h6>Category : {product?.category?.name}</h6>
-          <button class="btn btn-secondary ms-1">ADD TO CART</button>
+          <button class="btn btn-secondary ms-1" onClick={() => { setCart([...cart, product]); toast.success('Item Added to Cart.'); localStorage.setItem("cart", JSON.stringify([...cart, product])) }} style={{ color: "white", background: "#9f954a", border: "solid green 1px", padding: "4px", marginright: "23px" }}>ADD TO CART</button>
         </div>
       </div>
       <hr/>
