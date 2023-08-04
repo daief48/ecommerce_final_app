@@ -11,6 +11,7 @@ const Search = () => {
   const navigate = useNavigate();
   return (
     <Layout title={"Search results"}>
+    <br /><br /><br /><br /><br />
       <div className="container">
         <div className="text-center">
           <h1>Search Results</h1>
