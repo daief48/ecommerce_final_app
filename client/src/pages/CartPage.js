@@ -179,7 +179,7 @@ const CartPage = () => {
                   ""
                 ) : (
                   <>
-                    <button onClick={handlePayment}>Make Payment</button>
+                    <button onClick={handlePayment} className="btn btn-success">Make Payment</button>
                   </>
                 )}
               </div>
