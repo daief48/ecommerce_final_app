@@ -37,6 +37,7 @@ const getSimilarProduct = async (pid, cid) => {
   };
   return (
     <Layout>
+    <br /><br /><br /><br />
       <div className="row container mt-2">
         <div className="col-md-6">
             <img src={`https://ecommerce-final-app-backend.onrender.com/api/v1/product/product-photo/${product._id}`} alt={product.name} height="300" width={"350px"}/>

@@ -77,7 +77,7 @@ router.post("/ssl-payment-success", async (req, res) => {
   * If payment successful 
   */
 
-  return res.send('Payment Successfull')
+  return res.redirect('http://localhost:3000/')
 })
 
 router.post("/ssl-payment-fail", async (req, res) => {
