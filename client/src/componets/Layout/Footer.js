@@ -47,7 +47,7 @@ function toggleWithDelay(selector, delay) {
                 <li class="list-inline-item"><Link to="/about">About</Link></li>
                 <li class="list-inline-item"><Link to="/policy">Privacy Policy</Link></li>
             </ul>
-            <p class="copyright">Company Name © 2018</p>
+            <p class="copyright">Company Name Major © 2023</p>
         </footer>
     </div>
 
